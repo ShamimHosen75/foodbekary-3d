@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom'
 import { useUiStore, type Panel } from '../../store/uiStore'
 import { Drawer } from '../ui'
 import { CartPanel } from './CartPanel'
-import { ComingSoonPanel } from './ComingSoonPanel'
 import { FavoritesPanel } from './FavoritesPanel'
 import { MenuPanel } from './MenuPanel'
+import { OrdersPanel } from './OrdersPanel'
 import { SearchPanel } from './SearchPanel'
 
 const titles: Record<Panel, string> = {
@@ -27,7 +27,7 @@ function PanelBody({ panel }: { panel: Panel }) {
     case 'favorites':
       return <FavoritesPanel />
     case 'orders':
-      return <ComingSoonPanel icon="📦" text="Your order receipts will appear here after checkout (Phase 5)." />
+      return <OrdersPanel />
   }
 }
 

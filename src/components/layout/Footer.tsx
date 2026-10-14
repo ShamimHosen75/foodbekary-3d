@@ -69,10 +69,10 @@ export function Footer() {
           </p>
           <FooterNewsletter />
           <div>
-            <p className="mb-2 text-xs font-semibold text-white">We accept</p>
+            <p className="mb-2 text-xs font-semibold text-white">How to pay</p>
             <ul className="flex flex-wrap gap-2 text-xs">
               <li className="rounded-full bg-white/8 px-3 py-1.5">💵 Cash on Delivery</li>
-              <li className="rounded-full bg-white/8 px-3 py-1.5">📱 bKash / Nagad</li>
+              <li className="rounded-full bg-white/8 px-3 py-1.5">💬 Order on WhatsApp</li>
             </ul>
           </div>
         </div>

@@ -131,7 +131,7 @@ await test('unknown category and unknown path show the 404 page', async () => {
 await test('cart badge shows total quantity and survives reload', async () => {
   const p = await page(1280)
   await p.goto(base + '/')
-  await p.evaluate(() => localStorage.setItem('foodbekary-cart', JSON.stringify({ state: { lines: [{ productId: 'a', qty: 1 }, { productId: 'b', qty: 3 }] }, version: 1 })))
+  await p.evaluate(() => localStorage.setItem('foodbekary-cart', JSON.stringify({ state: { lines: [{ productId: 'classic-chocolate-chunk', qty: 1 }, { productId: 'raspberry-macaron', qty: 3 }] }, version: 1 })))
   await p.reload()
   assert((await p.getByTestId('cart-count').innerText()) === '4', 'badge not 4')
   await p.getByRole('button', { name: 'Cart, 4 items' }).click()

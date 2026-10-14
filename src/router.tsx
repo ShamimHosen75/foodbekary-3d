@@ -2,8 +2,10 @@ import { lazy, Suspense } from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import { RootLayout, type RouteHandle } from './components/layout/RootLayout'
 import { CategoryPage } from './pages/CategoryPage'
+import { CheckoutPage } from './pages/CheckoutPage'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { OrderConfirmationPage } from './pages/OrderConfirmationPage'
 import { ProductPage } from './pages/ProductPage'
 
 const DesignSystemPage = lazy(() =>
@@ -19,6 +21,8 @@ export const router = createBrowserRouter([
       { path: '/', element: <HomePage />, handle: home },
       { path: '/menu/:category', element: <CategoryPage /> },
       { path: '/product/:slug', element: <ProductPage /> },
+      { path: '/checkout', element: <CheckoutPage /> },
+      { path: '/order/:id', element: <OrderConfirmationPage /> },
       {
         path: '/design',
         element: (

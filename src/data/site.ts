@@ -17,6 +17,11 @@ export const site = {
     email: 'hello@foodbekary.example',
     address: 'Gulshan 2, Dhaka',
   },
+  /** Delivery charges in taka. PLACEHOLDERS — confirm with the owner. */
+  delivery: {
+    insideDhaka: { label: 'Inside Dhaka', fee: 60, eta: 'Same day if ordered before 4 PM' },
+    outsideDhaka: { label: 'Outside Dhaka', fee: 120, eta: '1–2 days by courier' },
+  },
   social: {
     facebook: 'https://facebook.com/',
     instagram: 'https://instagram.com/',

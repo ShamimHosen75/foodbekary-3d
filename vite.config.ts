@@ -5,6 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  // Keep every image a separate, cacheable, lazily-loaded file instead of base64 inside the JS bundle.
+  build: { assetsInlineLimit: 0 },
   test: {
     environment: 'jsdom',
     globals: true,

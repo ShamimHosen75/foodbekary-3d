@@ -1,8 +1,11 @@
-import { selectCartCount, useCartStore } from '../../store/cartStore'
+import { resolveCart } from '../../lib/cart'
+import { useCartStore } from '../../store/cartStore'
 import { useUiStore } from '../../store/uiStore'
 
 export function CartButton() {
-  const count = useCartStore(selectCartCount)
+  // Count what the drawer will actually show (unknown products are dropped there too).
+  const lines = useCartStore((s) => s.lines)
+  const count = resolveCart(lines).items.reduce((n, i) => n + i.qty, 0)
   const open = useUiStore((s) => s.open)
   return (
     <button
