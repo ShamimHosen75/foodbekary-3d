@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { CheckoutForm } from '../components/checkout/CheckoutForm'
+import { MobileCheckoutBar } from '../components/checkout/MobileCheckoutBar'
 import { OrderSummary } from '../components/checkout/OrderSummary'
 import { clearCheckoutDraft, useCheckoutForm } from '../components/checkout/useCheckoutForm'
 import { Button, buttonClasses, Container, SectionHeading } from '../components/ui'
@@ -73,6 +74,7 @@ export function CheckoutPage() {
         </p>
       )}
       <form
+        id="checkout-form"
         noValidate
         onSubmit={(e) => {
           e.preventDefault()
@@ -86,7 +88,8 @@ export function CheckoutPage() {
           <OrderSummary items={cart.orderable} zone={form.values.zone}>
             {blocked && <p role="alert" className="text-sm font-semibold text-danger">Some items sold out — remove them from your basket first.</p>}
             <div className="space-y-3">
-              <Button type="submit" size="lg" className="w-full" disabled={busy !== null || blocked}>
+              {/* On phones the sticky bar carries this action, so keep a single "Place order" per screen. */}
+              <Button type="submit" size="lg" className="w-full max-md:hidden" disabled={busy !== null || blocked}>
                 {busy === 'web' ? 'Placing order…' : `Place order · ${formatPrice(total)}`}
               </Button>
               <Button type="button" variant="outline" size="lg" className="w-full" disabled={busy !== null || blocked} onClick={() => void place('whatsapp')}>
@@ -97,6 +100,7 @@ export function CheckoutPage() {
           </OrderSummary>
         </div>
       </form>
+      <MobileCheckoutBar formId="checkout-form" total={total} busy={busy !== null} disabled={blocked} />
     </Container>
   )
 }

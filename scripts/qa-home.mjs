@@ -26,7 +26,7 @@ const activeLabel = (p) => p.locator('nav[aria-label="Story scenes"] [aria-curre
 await test('home has exactly one h1 and sections in reference order', async () => {
   const p = await page()
   assert((await p.locator('h1').count()) === 1, 'h1 count != 1')
-  const order = await p.locator('main > section').evaluateAll((s) => s.map((x) => x.getAttribute('aria-label') ?? x.getAttribute('aria-labelledby')))
+  const order = await p.locator('main section[aria-label], main section[aria-labelledby]').evaluateAll((s) => s.map((x) => x.getAttribute('aria-label') ?? x.getAttribute('aria-labelledby')))
   assert(JSON.stringify(order) === JSON.stringify(['Our story', 'showcase-title', 'reviews-title']), `order: ${order}`)
   await p.close()
 })

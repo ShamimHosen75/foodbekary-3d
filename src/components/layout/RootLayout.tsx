@@ -1,5 +1,6 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { useEffect } from 'react'
-import { Outlet, ScrollRestoration, useMatches } from 'react-router-dom'
+import { Outlet, ScrollRestoration, useLocation, useMatches } from 'react-router-dom'
 import { useUiStore } from '../../store/uiStore'
 import { PanelHost } from '../panels/PanelHost'
 import { QuickViewModal } from '../product/QuickViewModal'
@@ -16,6 +17,8 @@ export function RootLayout() {
   const matches = useMatches()
   const handle = matches[matches.length - 1]?.handle as RouteHandle | undefined
   const open = useUiStore((s) => s.open)
+  const { pathname } = useLocation()
+  const reduce = useReducedMotion()
 
   // Ctrl/⌘ + K opens search from anywhere, as advertised in the footer.
   useEffect(() => {
@@ -31,7 +34,15 @@ export function RootLayout() {
 
   return (
     <BaseLayout header={<Header variant={handle?.header ?? 'category'} />} footer={<Footer />}>
-      <Outlet />
+      {/* Gentle fade-in per page. No exit animation, so navigation never waits and scroll restoration stays exact. */}
+      <motion.div
+        key={pathname}
+        initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <Outlet />
+      </motion.div>
       <PanelHost />
       <QuickViewModal />
       <Toaster />

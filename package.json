@@ -15,6 +15,7 @@
     "qa:home": "node scripts/qa-home.mjs",
     "qa:products": "node scripts/qa-products.mjs",
     "qa:checkout": "node scripts/qa-checkout.mjs",
+    "qa:motion": "node scripts/qa-motion.mjs",
     "art": "node scripts/art/render.mjs"
   },
   "dependencies": {

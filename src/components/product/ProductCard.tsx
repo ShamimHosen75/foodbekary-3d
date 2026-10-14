@@ -4,7 +4,7 @@ import { useAddToCart } from '../../hooks/useAddToCart'
 import { cn } from '../../lib/cn'
 import { isLowStock, isSoldOut } from '../../lib/pricing'
 import { useUiStore } from '../../store/uiStore'
-import { Badge, Button, Card } from '../ui'
+import { Badge, Button, Card, SmartImage } from '../ui'
 import { FavoriteButton } from './FavoriteButton'
 import { PriceTag } from './PriceTag'
 
@@ -22,15 +22,16 @@ export function ProductCard({ product }: { product: Product }) {
           aria-label={`Quick view: ${product.name}`}
           className="group/qv absolute inset-0 block h-full w-full cursor-pointer"
         >
-          <img
+          <SmartImage
             src={product.images[0]}
             alt={product.name}
             width={640}
             height={480}
             loading="lazy"
             decoding="async"
+            wrapperClassName="h-full w-full"
             className={cn(
-              'h-full w-full object-cover transition-transform duration-700 ease-out-soft group-hover/card:scale-105',
+              'h-full w-full object-cover transition-[opacity,transform] duration-700 ease-out-soft group-hover/card:scale-105',
               soldOut && 'grayscale-[60%]',
             )}
           />

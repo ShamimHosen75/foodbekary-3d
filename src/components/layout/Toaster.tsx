@@ -6,7 +6,7 @@ export function Toaster() {
   const toasts = useToastStore((s) => s.toasts)
   const dismiss = useToastStore((s) => s.dismiss)
   return (
-    <div role="status" aria-live="polite" className="pointer-events-none fixed right-4 bottom-4 left-4 z-[60] flex flex-col items-end gap-2 sm:left-auto">
+    <div role="status" aria-live="polite" className="pointer-events-none fixed right-4 bottom-[calc(1rem+var(--bottom-bar,0px))] left-4 z-[60] flex flex-col items-end gap-2 sm:left-auto">
       <AnimatePresence initial={false}>
         {toasts.map((t) => (
           <motion.button

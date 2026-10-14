@@ -21,7 +21,7 @@ export function Field({ id, label, hint, error, optional, children }: FieldProps
       {/* Hint and error share one line box so swapping them never shifts the layout mid-click. */}
       {error ? (
         <p id={`${id}-error`} className="text-xs leading-4 font-semibold text-danger">
-          <span aria-hidden="true" className="mr-1 inline-grid size-3.5 place-items-center rounded-full bg-danger align-[-2px] text-[0.625rem] leading-none text-white">!</span>
+          <span aria-hidden="true" className="mr-1 inline-grid size-3 place-items-center rounded-full bg-danger align-[-2px] text-[0.625rem] leading-none text-white">!</span>
           {error}
         </p>
       ) : (

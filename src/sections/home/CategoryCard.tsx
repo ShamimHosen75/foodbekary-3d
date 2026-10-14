@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Badge, buttonClasses, Card } from '../../components/ui'
+import { Badge, buttonClasses, Card, SmartImage } from '../../components/ui'
 import { categoryPath, type Category } from '../../data/categories'
 import { getCategoryStats } from '../../data/categoryStats'
 import { cn } from '../../lib/cn'
@@ -11,14 +11,15 @@ export function CategoryCard({ category }: { category: Category }) {
   return (
     <Card interactive as="article" className="h-full">
       <div className="relative aspect-[5/3] overflow-hidden bg-sand">
-        <img
+        <SmartImage
           src={category.image}
           alt=""
           width={640}
           height={384}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover transition-transform duration-700 ease-out-soft group-hover/card:scale-105"
+          wrapperClassName="h-full w-full"
+          className="h-full w-full object-cover transition-[opacity,transform] duration-700 ease-out-soft group-hover/card:scale-105"
         />
         <Badge className="absolute top-3 right-3">{count} items</Badge>
       </div>

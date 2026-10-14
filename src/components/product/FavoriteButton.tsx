@@ -1,3 +1,4 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { useFavoritesStore } from '../../store/favoritesStore'
 import { useToastStore } from '../../store/toastStore'
 import { cn } from '../../lib/cn'
@@ -6,6 +7,7 @@ export function FavoriteButton({ productId, name, className }: { productId: stri
   const saved = useFavoritesStore((s) => s.ids.includes(productId))
   const toggle = useFavoritesStore((s) => s.toggle)
   const toast = useToastStore((s) => s.push)
+  const reduce = useReducedMotion()
   return (
     <button
       type="button"
@@ -21,7 +23,15 @@ export function FavoriteButton({ productId, name, className }: { productId: stri
         className,
       )}
     >
-      <span aria-hidden="true">{saved ? '❤️' : '🤍'}</span>
+      <motion.span
+        key={String(saved)}
+        aria-hidden="true"
+        initial={reduce ? false : { scale: saved ? 0.4 : 1.2 }}
+        animate={{ scale: 1 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 12 }}
+      >
+        {saved ? '❤️' : '🤍'}
+      </motion.span>
     </button>
   )
 }

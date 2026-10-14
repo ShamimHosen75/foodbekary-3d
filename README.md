@@ -13,6 +13,7 @@ UX and motion of a reference site, with our own brand and content.
 | `npm run qa:home` | Browser tests for the home page: scroll hero, cards, reviews, reduced motion, CLS |
 | `npm run qa:products` | Browser tests for catalogue: filters, search, Quick View, stock, favourites, 404 |
 | `npm run qa:checkout` | Browser tests for cart, checkout validation, double-submit, WhatsApp, receipts |
+| `npm run qa:motion` | Frame timing under 4× CPU throttle, reduced-motion checks, image loading states |
 | `npm run art` | Re-render the placeholder artwork in `src/assets` |
 | `npm run qa:shell` | Browser tests for header, menu, routing, cart badge, 404, CLS (needs `npm run preview`) |
 
@@ -30,7 +31,14 @@ UX and motion of a reference site, with our own brand and content.
 - **Phase 3 — Home page:** done (scroll-driven 3-scene hero, category cards, testimonials)
 - **Phase 4 — Products:** done (26 products, filters + search in the URL, Quick View, product pages, favourites, menu search)
 - **Phase 5 — Cart & checkout:** done (cart drawer, checkout with BD phone validation, Cash on Delivery, WhatsApp orders, receipts)
-- Phase 6 — Animations & polish: next
+- **Phase 6 — Animations & polish:** done (motion audit vs reference, image shimmer, page fade, micro-interactions, mobile checkout bar)
+- Phase 7 — SEO, performance & deploy: next
+
+## Motion
+All motion maps to the reference inventory (REFERENCE_ANALYSIS.md §7) and honours
+`prefers-reduced-motion`: movement (slides, zooms, scale pops) is removed and only fades remain.
+Framer Motion drives the hero, reveals, grid stagger, drawer, modal, page fade, badge bump and
+heart pop; CSS handles hovers and the image shimmer.
 
 ## Orders
 There is no backend yet: orders are saved on the customer's device ("My orders") and can be sent to
