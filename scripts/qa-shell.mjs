@@ -161,7 +161,7 @@ await test('newsletter validates then confirms', async () => {
   assert((await input.getAttribute('aria-invalid')) === 'true', 'aria-invalid not set')
   await input.fill('me@example.com')
   await p.getByRole('button', { name: 'Subscribe' }).click()
-  await p.getByRole('status').waitFor()
+  await p.locator('footer').getByRole('status').waitFor()
   await p.close()
 })
 

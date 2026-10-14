@@ -4,6 +4,7 @@ import { RootLayout, type RouteHandle } from './components/layout/RootLayout'
 import { CategoryPage } from './pages/CategoryPage'
 import { HomePage } from './pages/HomePage'
 import { NotFoundPage } from './pages/NotFoundPage'
+import { ProductPage } from './pages/ProductPage'
 
 const DesignSystemPage = lazy(() =>
   import('./pages/DesignSystemPage').then((m) => ({ default: m.DesignSystemPage })),
@@ -17,6 +18,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage />, handle: home },
       { path: '/menu/:category', element: <CategoryPage /> },
+      { path: '/product/:slug', element: <ProductPage /> },
       {
         path: '/design',
         element: (

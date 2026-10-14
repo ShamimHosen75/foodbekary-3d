@@ -4,7 +4,9 @@ import { useUiStore, type Panel } from '../../store/uiStore'
 import { Drawer } from '../ui'
 import { CartPanel } from './CartPanel'
 import { ComingSoonPanel } from './ComingSoonPanel'
+import { FavoritesPanel } from './FavoritesPanel'
 import { MenuPanel } from './MenuPanel'
+import { SearchPanel } from './SearchPanel'
 
 const titles: Record<Panel, string> = {
   menu: 'Menu',
@@ -21,9 +23,9 @@ function PanelBody({ panel }: { panel: Panel }) {
     case 'cart':
       return <CartPanel />
     case 'search':
-      return <ComingSoonPanel icon="🔍" text="Menu search arrives with the product catalogue (Phase 4)." />
+      return <SearchPanel />
     case 'favorites':
-      return <ComingSoonPanel icon="❤️" text="Saved favourites arrive with the product catalogue (Phase 4)." />
+      return <FavoritesPanel />
     case 'orders':
       return <ComingSoonPanel icon="📦" text="Your order receipts will appear here after checkout (Phase 5)." />
   }
@@ -31,9 +33,12 @@ function PanelBody({ panel }: { panel: Panel }) {
 
 /** Renders whichever overlay the UI store has open; closes on navigation. */
 export function PanelHost() {
-  const { panel, close } = useUiStore()
+  const { panel, close, closeQuickView } = useUiStore()
   const { pathname } = useLocation()
-  useEffect(() => close(), [pathname, close])
+  useEffect(() => {
+    close()
+    closeQuickView()
+  }, [pathname, close, closeQuickView])
 
   // Keep the last panel's content mounted while the drawer animates out.
   const [shown, setShown] = useState<Panel | null>(panel)

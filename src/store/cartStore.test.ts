@@ -24,6 +24,18 @@ describe('cartStore', () => {
     expect(useCartStore.getState().lines).toEqual([])
   })
 
+  it('respects a per-product stock cap across repeat adds', () => {
+    const { add } = useCartStore.getState()
+    add('slice', 2, 3)
+    add('slice', 2, 3)
+    expect(useCartStore.getState().lines[0]?.qty).toBe(3)
+  })
+
+  it('ignores adds of a sold-out product (max 0)', () => {
+    useCartStore.getState().add('gone', 1, 0)
+    expect(useCartStore.getState().lines).toEqual([])
+  })
+
   it('persists to localStorage', () => {
     useCartStore.getState().add('cake', 2)
     expect(localStorage.getItem('foodbekary-cart')).toContain('"qty":2')

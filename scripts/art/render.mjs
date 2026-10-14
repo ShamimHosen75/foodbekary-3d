@@ -2,7 +2,8 @@
 import { chromium } from 'playwright-core'
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, rmSync } from 'node:fs'
-import { categoryScenes, heroScenes } from './scenes.mjs'
+import { productArt } from './products.mjs'
+import { categoryScenes, heroScenes, productScene } from './scenes.mjs'
 
 const tmp = 'qa-output/art'
 mkdirSync(tmp, { recursive: true })
@@ -43,6 +44,11 @@ im.save('${outDir}/${name}-${w}.webp', 'WEBP', quality=${q}, method=6)
 
 for (const [name, html] of heroScenes) await render(name, html, 1600, 1000, 'src/assets/hero', [[1600, 72], [900, 70]])
 for (const [name, html] of categoryScenes) await render(name, html, 800, 480, 'src/assets/categories', [[640, 74]])
+// Two shots per product: a styled overview and a closer "detail" angle.
+for (const [slug, bg, ...props] of productArt) {
+  await render(`${slug}-1`, productScene(bg, props, 1), 800, 600, 'src/assets/products', [[640, 72]])
+  await render(`${slug}-2`, productScene(bg, props, 2), 800, 600, 'src/assets/products', [[640, 72]])
+}
 await browser.close()
 rmSync(tmp, { recursive: true, force: true })
 console.log('done')

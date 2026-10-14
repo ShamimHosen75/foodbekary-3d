@@ -2,9 +2,11 @@ import { useEffect } from 'react'
 import { Outlet, ScrollRestoration, useMatches } from 'react-router-dom'
 import { useUiStore } from '../../store/uiStore'
 import { PanelHost } from '../panels/PanelHost'
+import { QuickViewModal } from '../product/QuickViewModal'
 import { BaseLayout } from './BaseLayout'
 import { Footer } from './Footer'
 import { Header, type HeaderVariant } from './Header'
+import { Toaster } from './Toaster'
 
 export interface RouteHandle {
   header?: HeaderVariant
@@ -31,6 +33,8 @@ export function RootLayout() {
     <BaseLayout header={<Header variant={handle?.header ?? 'category'} />} footer={<Footer />}>
       <Outlet />
       <PanelHost />
+      <QuickViewModal />
+      <Toaster />
       <ScrollRestoration />
     </BaseLayout>
   )

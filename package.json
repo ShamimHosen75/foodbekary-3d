@@ -13,6 +13,7 @@
     "qa:screens": "node scripts/qa-screens.mjs",
     "qa:shell": "node scripts/qa-shell.mjs",
     "qa:home": "node scripts/qa-home.mjs",
+    "qa:products": "node scripts/qa-products.mjs",
     "art": "node scripts/art/render.mjs"
   },
   "dependencies": {

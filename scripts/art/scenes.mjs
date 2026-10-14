@@ -73,3 +73,19 @@ export const categoryScenes = [
   ['cat-macarons', base('radial-gradient(circle at 40% 30%,#f8ece6,#d9b6a8 75%)', `${macaron(30, 60, 150, '#f2a8a0')}${macaron(52, 46, 150, '#c9de9a')}${macaron(74, 62, 150, '#f6dc8a')}${macaron(52, 76, 120, '#d9b8e8')}`)],
   ['cat-pastries', base('radial-gradient(circle at 60% 30%,#f9e1e4,#d99aa6 75%)', `${emoji('🍰', 50, 56, 210)}${emoji('🍫', 20, 76, 64)}${emoji('🍒', 82, 28, 60)}`)],
 ]
+
+/** Product shot. variant 1 = full composition; variant 2 = closer crop on the hero prop with soft light. */
+export function productScene(bg, props, variant) {
+  const [light, dark] = bg.split(',')
+  const draw = ([what, x, y, size]) =>
+    what.startsWith('#') ? macaron(x, y, size, what) : emoji(what, x, y, size)
+  if (variant === 1) {
+    return base(`radial-gradient(circle at 35% 25%,${light},${dark} 80%)`, props.map(draw).join(''))
+  }
+  const [main, ...rest] = props
+  return base(
+    `radial-gradient(circle at 70% 70%,${light},${dark} 90%)`,
+    `<div style="position:absolute;inset:0;transform:scale(1.55) translate(4%,-6%)">${draw(main)}${rest.map(draw).join('')}</div>
+     <div style="position:absolute;inset:0;background:radial-gradient(circle at 20% 15%,rgba(255,255,255,.45),transparent 45%)"></div>`,
+  )
+}
