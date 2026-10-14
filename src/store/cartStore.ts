@@ -46,7 +46,7 @@ export const useCartStore = create<CartState>()(
       remove: (productId) => set((s) => ({ lines: s.lines.filter((l) => l.productId !== productId) })),
       clear: () => set({ lines: [] }),
     }),
-    { name: 'foodbekary-cart', version: 1 },
+    { name: 'foodbekary-cart', version: 1, skipHydration: true },
   ),
 )
 

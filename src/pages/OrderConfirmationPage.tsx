@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { m, useReducedMotion } from 'framer-motion'
 import { Link, useParams } from 'react-router-dom'
 import { TotalsTable } from '../components/cart/TotalsTable'
 import { buttonClasses, Container, SectionHeading } from '../components/ui'
@@ -26,7 +26,7 @@ export function OrderConfirmationPage() {
   return (
     <Container size="content" className="max-w-[44rem] py-14 sm:py-20">
       <div className="flex flex-col items-center gap-4 text-center">
-        <motion.span
+        <m.span
           aria-hidden="true"
           initial={reduce ? false : { scale: 0.4, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -34,7 +34,7 @@ export function OrderConfirmationPage() {
           className="grid size-16 place-items-center rounded-full bg-success text-3xl text-white shadow-lift"
         >
           ✓
-        </motion.span>
+        </m.span>
         <SectionHeading as="h1" eyebrow={`Order ${order.id}`} title={`Thank you, ${customer.name.split(' ')[0]}!`} intro={`We’ve received your order and will call ${customer.phone} shortly to confirm. Pay ${formatPrice(order.total)} in cash on delivery.`} />
       </div>
 

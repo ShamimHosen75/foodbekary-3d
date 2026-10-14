@@ -37,7 +37,7 @@ export function ProductPage() {
 
       <div className="grid gap-8 md:grid-cols-2 md:gap-10">
         <div className="relative">
-          <ProductGallery key={product.id} images={product.images} name={product.name} />
+          <ProductGallery key={product.id} images={product.images} name={product.name} priority />
           <div className="absolute top-3 right-3 left-3 flex items-start justify-between">
             {isSoldOut(product) ? <Badge variant="neutral" className="bg-surface/90">Sold out</Badge> : product.badge ? <Badge variant="accent">{product.badge}</Badge> : <span />}
             <FavoriteButton productId={product.id} name={product.name} />
@@ -48,7 +48,7 @@ export function ProductPage() {
           <h1 className="-mt-2 text-[2rem] leading-tight font-semibold sm:text-[2.5rem]">{product.name}</h1>
           <PriceTag product={product} className="text-2xl" />
           <p className="leading-relaxed text-muted">{product.description}</p>
-          <ProductInfo product={product} />
+          <ProductInfo product={product} headingLevel="h2" />
           <div className="pt-2">
             <PurchaseBox key={product.id} product={product} />
           </div>

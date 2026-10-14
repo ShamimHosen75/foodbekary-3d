@@ -76,7 +76,7 @@ await test('every category page lists its products (8/6/6/6) with working chips'
 
 await test('sold-out product: disabled card button, Quick View + product page show sold-out note', async () => {
   const p = await open('/menu/cakes')
-  const btn = p.getByRole('button', { name: 'Mango Cream Cake is sold out' })
+  const btn = p.getByRole('button', { name: 'Sold out: Mango Cream Cake' })
   assert(await btn.isDisabled(), 'card button enabled')
   await p.getByRole('button', { name: 'Quick view: Mango Cream Cake' }).click()
   await p.getByRole('dialog').getByText('Sold out for today').waitFor()
@@ -108,7 +108,7 @@ await test('stock cap: Lotus (2 left) — stepper stops at 2, then card add refu
   await p.keyboard.press('Escape')
   await p.getByText('You have all 2 of today’s stock in your cart.').waitFor()
   await p.goto(base + '/menu/cakes', { waitUntil: 'networkidle' })
-  await p.getByRole('button', { name: 'Add Lotus Biscoff Cake to cart' }).click()
+  await p.getByRole('button', { name: 'Add to Cart: Lotus Biscoff Cake' }).click()
   await p.getByText('maximum of “Lotus Biscoff Cake”').waitFor()
   assert((await badge(p)) === '2', `badge ${await badge(p)}`)
   await p.close()
@@ -116,8 +116,8 @@ await test('stock cap: Lotus (2 left) — stepper stops at 2, then card add refu
 
 await test('card Add to Cart adds one and confirms with a toast', async () => {
   const p = await open('/menu/cookies')
-  await p.getByRole('button', { name: 'Add Nutella Stuffed Cookie to cart' }).click()
-  await p.getByRole('button', { name: 'Add Nutella Stuffed Cookie to cart' }).click()
+  await p.getByRole('button', { name: 'Add to Cart: Nutella Stuffed Cookie' }).click()
+  await p.getByRole('button', { name: 'Add to Cart: Nutella Stuffed Cookie' }).click()
   await p.getByText('“Nutella Stuffed Cookie” added to your cart').first().waitFor()
   assert((await badge(p)) === '2', `badge ${await badge(p)}`)
   await p.close()

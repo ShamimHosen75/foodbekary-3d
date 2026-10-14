@@ -100,7 +100,9 @@ await test('image loading: shimmer placeholder while slow images load, then fade
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 900 } })
   const p = await ctx.newPage()
   await p.route('**/assets/*-1-640-*.webp', async (r) => { await new Promise((res) => setTimeout(res, 1500)); await r.continue() })
-  await p.goto(base + '/menu/cookies')
+  // Prerendered pages show images immediately by design; the shimmer is for in-app navigation.
+  await p.goto(base + '/', { waitUntil: 'networkidle' })
+  await p.locator('footer').getByRole('link', { name: /Fresh-baked Cookies/ }).click()
   const first = p.getByTestId('product-grid').locator('article').first().locator('span.skeleton')
   await first.waitFor({ timeout: 3000 })
   await p.waitForFunction(() => document.querySelectorAll('[data-testid="product-grid"] [data-loaded]').length === 6, null, { timeout: 8000 })
@@ -112,7 +114,7 @@ await test('image loading: shimmer placeholder while slow images load, then fade
 
 await test('cart badge bump keeps the right count through rapid adds', async () => {
   const p = await open('/menu/cookies', { width: 1280 })
-  const btn = p.getByRole('button', { name: 'Add Classic Chocolate Chunk to cart' })
+  const btn = p.getByRole('button', { name: 'Add to Cart: Classic Chocolate Chunk' })
   for (let i = 0; i < 5; i++) await btn.click()
   await p.waitForTimeout(500)
   assert((await p.getByTestId('cart-count').innerText()) === '5', await p.getByTestId('cart-count').innerText())

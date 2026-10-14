@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { categoryPath } from '../../data/categories'
 import type { HeroScene } from '../../data/heroScenes'
@@ -24,7 +24,7 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
   return (
     <div className="relative min-h-[19rem] w-full max-w-[25rem] sm:min-h-[21rem]" aria-live="polite">
       <AnimatePresence mode="wait" initial={false}>
-        <motion.div
+        <m.div
           key={scene.id}
           initial={hidden}
           animate={shown}
@@ -62,7 +62,7 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
               </a>
             </div>
           )}
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
   )

@@ -1,7 +1,8 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useMounted } from '../../hooks/useMounted'
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll'
 
 export interface ModalProps {
@@ -17,6 +18,7 @@ export interface ModalProps {
 export function Modal({ open, onClose, labelledBy, children, contentKey }: ModalProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  const mounted = useMounted()
   useLockBodyScroll(open)
   useFocusTrap(ref, open, contentKey)
 
@@ -27,11 +29,12 @@ export function Modal({ open, onClose, labelledBy, children, contentKey }: Modal
     return () => window.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
+  if (!mounted) return null
   return createPortal(
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-center sm:items-center sm:p-6">
-          <motion.div
+          <m.div
             data-testid="modal-backdrop"
             className="absolute inset-0 bg-ink/40 backdrop-blur-[4px]"
             initial={{ opacity: 0 }}
@@ -39,7 +42,7 @@ export function Modal({ open, onClose, labelledBy, children, contentKey }: Modal
             exit={{ opacity: 0 }}
             onClick={onClose}
           />
-          <motion.div
+          <m.div
             ref={ref}
             role="dialog"
             aria-modal="true"
@@ -59,7 +62,7 @@ export function Modal({ open, onClose, labelledBy, children, contentKey }: Modal
               <span aria-hidden="true">✕</span>
             </button>
             {children}
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>,

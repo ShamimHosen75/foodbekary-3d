@@ -7,12 +7,16 @@ UX and motion of a reference site, with our own brand and content.
 | Command | What it does |
 |---|---|
 | `npm run dev` | Dev server |
-| `npm run build` | Typecheck + production build |
+| `npm run build` | Typecheck + production build + prerender all public pages |
+| `npm run preview` | Serve `dist/` like Netlify (prerendered pages, SPA fallback, brotli) |
 | `npm run lint` / `npm run typecheck` / `npm test` | Quality gates |
 | `npm run qa:screens -- http://localhost:4173 / /menu/cakes` | Browser QA at 360/768/1024/1440 (needs `npm run preview`) |
 | `npm run qa:home` | Browser tests for the home page: scroll hero, cards, reviews, reduced motion, CLS |
 | `npm run qa:products` | Browser tests for catalogue: filters, search, Quick View, stock, favourites, 404 |
 | `npm run qa:checkout` | Browser tests for cart, checkout validation, double-submit, WhatsApp, receipts |
+| `npm run qa:prerender` | No-JS content, hydration without mismatches, head tags, sitemap |
+| `npm run lighthouse` | Lighthouse mobile + desktop on key pages (needs `npm run preview`) |
+| `npm run brand` | Regenerate share image + app icons from the brand settings |
 | `npm run qa:motion` | Frame timing under 4× CPU throttle, reduced-motion checks, image loading states |
 | `npm run art` | Re-render the placeholder artwork in `src/assets` |
 | `npm run qa:shell` | Browser tests for header, menu, routing, cart badge, 404, CLS (needs `npm run preview`) |
@@ -32,7 +36,28 @@ UX and motion of a reference site, with our own brand and content.
 - **Phase 4 — Products:** done (26 products, filters + search in the URL, Quick View, product pages, favourites, menu search)
 - **Phase 5 — Cart & checkout:** done (cart drawer, checkout with BD phone validation, Cash on Delivery, WhatsApp orders, receipts)
 - **Phase 6 — Animations & polish:** done (motion audit vs reference, image shimmer, page fade, micro-interactions, mobile checkout bar)
-- Phase 7 — SEO, performance & deploy: next
+- **Phase 7 — SEO, performance & deploy prep:** done (prerendering, per-page SEO + JSON-LD, sitemap, icons, code-splitting, Lighthouse 90+). See [`docs/QA_REPORT.md`](docs/QA_REPORT.md).
+
+## How the build works
+`npm run build` = typecheck → client build → server build of `src/entry-server.tsx` →
+`scripts/prerender.mjs`, which writes real HTML for every public page (home, 4 categories,
+26 products) with its own title, description, canonical, Open Graph and JSON-LD, plus
+`sitemap.xml` and the client-only shell `app.html` (checkout, receipts, 404).
+The browser then *hydrates* the HTML, so content is visible before JavaScript runs.
+Page metadata comes from one place: `src/seo/meta.ts`.
+
+## Deploying to Netlify
+1. In Netlify: **Add new site → Import an existing project → GitHub → `foodbekary-3d`**.
+2. Build settings are read from `netlify.toml` (command `npm run build`, publish `dist`, Node 22).
+3. Deploy. Then set your real domain in `src/data/site.ts` → `url` (used for canonical links,
+   sitemap and share images) and in `public/robots.txt`, commit, and Netlify redeploys.
+
+## Before going live — replace placeholders
+- `src/data/site.ts`: brand name/wordmark, tagline, phone, **WhatsApp number**, email, address,
+  social links, **delivery fees**, public `url`.
+- Products: `src/data/products/*.ts` and images in `src/assets/products/` (`<slug>-1-640.webp`, `<slug>-2-640.webp`).
+- Hero: photos in `src/assets/hero/`, or real footage via `heroVideo` in `src/data/heroScenes.ts`.
+- Then run `npm run brand` to regenerate the share image and app icons.
 
 ## Motion
 All motion maps to the reference inventory (REFERENCE_ANALYSIS.md §7) and honours

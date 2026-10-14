@@ -14,6 +14,6 @@ export const useOrdersStore = create<OrdersState>()(
       orders: [],
       add: (order) => set((s) => ({ orders: [order, ...s.orders.filter((o) => o.id !== order.id)].slice(0, 20) })),
     }),
-    { name: 'foodbekary-orders', version: 1 },
+    { name: 'foodbekary-orders', version: 1, skipHydration: true },
   ),
 )

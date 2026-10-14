@@ -42,7 +42,7 @@ await test('empty cart: drawer and /checkout show an empty state', async () => {
 
 await test('price math: card + Quick View adds → correct lines, sale prices, subtotal, badge', async () => {
   const p = await open('/menu/cookies')
-  await p.getByRole('button', { name: 'Add Nutella Stuffed Cookie to cart' }).click() // 180
+  await p.getByRole('button', { name: 'Add to Cart: Nutella Stuffed Cookie' }).click() // 180
   await p.goto(base + '/menu/cakes', { waitUntil: 'networkidle' })
   await p.getByRole('button', { name: 'Quick view: Dark Truffle Drip Cake' }).click()
   const inc = p.getByRole('dialog').getByRole('button', { name: 'Increase quantity' })
@@ -74,8 +74,8 @@ await test('drawer quantity −/+ updates line, subtotal and badge; limits enfor
 
 await test('cart survives a page refresh', async () => {
   const p = await open('/menu/pastries')
-  await p.getByRole('button', { name: 'Add Red Velvet Slice to cart' }).click()
-  await p.getByRole('button', { name: 'Add Red Velvet Slice to cart' }).click()
+  await p.getByRole('button', { name: 'Add to Cart: Red Velvet Slice' }).click()
+  await p.getByRole('button', { name: 'Add to Cart: Red Velvet Slice' }).click()
   await p.reload({ waitUntil: 'networkidle' })
   assert((await badge(p)) === '2', 'badge lost')
   const d = await openCart(p)

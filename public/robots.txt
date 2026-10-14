@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /order/
+Disallow: /design
+
+Sitemap: https://foodbekary.netlify.app/sitemap.xml

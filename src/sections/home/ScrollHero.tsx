@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion'
+import { m, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useCallback, useRef, useState } from 'react'
 import { heroScenes, heroVideo } from '../../data/heroScenes'
 import { site } from '../../data/site'
@@ -43,14 +43,14 @@ export function ScrollHero() {
       </h1>
       <div className="sticky top-0 h-svh overflow-hidden">
         <HeroBackdrop scenes={heroScenes} progress={scrollYProgress} reduceMotion={reduceMotion} video={heroVideo} />
-        <motion.div style={{ opacity: foreground }} className="absolute inset-0">
+        <m.div style={{ opacity: foreground }} className="absolute inset-0">
           <div className="mx-auto flex h-full max-w-[90rem] items-end px-4 pb-10 sm:px-6 md:items-center md:pb-0 lg:px-8">
             <div className="w-full max-w-[26rem] md:mt-24">
               <HeroCopy scenes={heroScenes} active={active} reduceMotion={reduceMotion} />
             </div>
           </div>
           <SceneRail labels={heroScenes.map((s) => s.label)} active={active} onSelect={goTo} />
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

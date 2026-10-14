@@ -1,6 +1,10 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { useEffect } from 'react'
+import { m, useReducedMotion } from 'framer-motion'
+import { useEffect, useMemo, useState } from 'react'
 import { Outlet, ScrollRestoration, useLocation, useMatches } from 'react-router-dom'
+import { useDocumentMeta } from '../../hooks/useDocumentMeta'
+import { hydration } from '../../lib/hydration'
+import { metaFor } from '../../seo/meta'
+import { rehydrateStores } from '../../store/rehydrate'
 import { useUiStore } from '../../store/uiStore'
 import { PanelHost } from '../panels/PanelHost'
 import { QuickViewModal } from '../product/QuickViewModal'
@@ -19,6 +23,15 @@ export function RootLayout() {
   const open = useUiStore((s) => s.open)
   const { pathname } = useLocation()
   const reduce = useReducedMotion()
+  // The page shown at hydration must not fade in: its HTML is already visible.
+  const [firstPath] = useState(() => (hydration.active ? pathname : null))
+  useDocumentMeta(useMemo(() => metaFor(pathname), [pathname]))
+  // After hydration commits (the page chunk is preloaded, so the whole tree hydrates in
+  // one pass): end "hydration mode" so later renders animate, and load saved state.
+  useEffect(() => {
+    hydration.active = false
+    if (hydration.fromServer) rehydrateStores()
+  }, [])
 
   // Ctrl/⌘ + K opens search from anywhere, as advertised in the footer.
   useEffect(() => {
@@ -35,14 +48,14 @@ export function RootLayout() {
   return (
     <BaseLayout header={<Header variant={handle?.header ?? 'category'} />} footer={<Footer />}>
       {/* Gentle fade-in per page. No exit animation, so navigation never waits and scroll restoration stays exact. */}
-      <motion.div
+      <m.div
         key={pathname}
-        initial={{ opacity: 0, y: reduce ? 0 : 10 }}
+        initial={pathname === firstPath ? false : { opacity: 0, y: reduce ? 0 : 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
         <Outlet />
-      </motion.div>
+      </m.div>
       <PanelHost />
       <QuickViewModal />
       <Toaster />

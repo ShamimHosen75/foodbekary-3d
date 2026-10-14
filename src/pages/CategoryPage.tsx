@@ -49,9 +49,11 @@ export function CategoryPage() {
         />
       </div>
 
-      <p className="sr-only" role="status" aria-live="polite">
-        {results.length} {results.length === 1 ? 'product' : 'products'} shown
-      </p>
+      <h2 className="sr-only">
+        <span role="status" aria-live="polite">
+          {results.length} {results.length === 1 ? 'product' : 'products'} shown
+        </span>
+      </h2>
 
       {results.length > 0 ? (
         <ProductGrid products={results} animationKey={`${category.slug}|${filter ?? 'all'}`} />

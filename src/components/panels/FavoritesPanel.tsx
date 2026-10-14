@@ -22,7 +22,7 @@ export function FavoritesPanel() {
             product={p}
             action={
               <div className="relative z-10 flex items-center gap-1">
-                <Button size="sm" variant="accent" disabled={isSoldOut(p)} onClick={() => addToCart(p)} aria-label={`Add ${p.name} to cart`}>
+                <Button size="sm" variant="accent" disabled={isSoldOut(p)} onClick={() => addToCart(p)} aria-label={`Add to cart: ${p.name}`}>
                   {isSoldOut(p) ? 'Sold out' : 'Add'}
                 </Button>
                 <button type="button" onClick={() => remove(p.id)} aria-label={`Remove ${p.name} from favourites`} className="grid size-8 cursor-pointer place-items-center rounded-full text-sm text-danger hover:bg-surface">

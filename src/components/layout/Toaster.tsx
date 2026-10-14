@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import { useToastStore } from '../../store/toastStore'
 
 /** Bottom-right confirmations ("… added to your cart"). Announced politely to screen readers. */
@@ -9,7 +9,7 @@ export function Toaster() {
     <div role="status" aria-live="polite" className="pointer-events-none fixed right-4 bottom-[calc(1rem+var(--bottom-bar,0px))] left-4 z-[60] flex flex-col items-end gap-2 sm:left-auto">
       <AnimatePresence initial={false}>
         {toasts.map((t) => (
-          <motion.button
+          <m.button
             key={t.id}
             type="button"
             layout
@@ -22,7 +22,7 @@ export function Toaster() {
           >
             <span aria-hidden="true">{t.icon}</span>
             {t.message}
-          </motion.button>
+          </m.button>
         ))}
       </AnimatePresence>
     </div>

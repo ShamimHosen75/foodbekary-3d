@@ -1,7 +1,8 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useEffect, useId, useRef, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import { useFocusTrap } from '../../hooks/useFocusTrap'
+import { useMounted } from '../../hooks/useMounted'
 import { useLockBodyScroll } from '../../hooks/useLockBodyScroll'
 import { cn } from '../../lib/cn'
 
@@ -21,6 +22,7 @@ export function Drawer({ open, onClose, title, children, footer, className, cont
   const titleId = useId()
   const panelRef = useRef<HTMLDivElement>(null)
   const reduce = useReducedMotion()
+  const mounted = useMounted()
   useLockBodyScroll(open)
   useFocusTrap(panelRef, open, contentKey)
 
@@ -31,11 +33,12 @@ export function Drawer({ open, onClose, title, children, footer, className, cont
     return () => window.removeEventListener('keydown', onKey)
   }, [open, onClose])
 
+  if (!mounted) return null
   return createPortal(
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50">
-          <motion.div
+          <m.div
             data-testid="drawer-backdrop"
             className="absolute inset-0 bg-ink/35 backdrop-blur-[3px]"
             initial={{ opacity: 0 }}
@@ -44,7 +47,7 @@ export function Drawer({ open, onClose, title, children, footer, className, cont
             transition={{ duration: 0.25 }}
             onClick={onClose}
           />
-          <motion.div
+          <m.div
             ref={panelRef}
             role="dialog"
             aria-modal="true"
@@ -73,7 +76,7 @@ export function Drawer({ open, onClose, title, children, footer, className, cont
             </header>
             <div className="flex-1 overflow-y-auto overscroll-contain px-5 py-4">{children}</div>
             {footer && <div className="border-t border-line bg-surface px-5 py-4">{footer}</div>}
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>,

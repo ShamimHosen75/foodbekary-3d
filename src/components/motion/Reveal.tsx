@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, type Variants } from 'framer-motion'
+import { m, useReducedMotion, type Variants } from 'framer-motion'
 import type { ReactNode } from 'react'
 
 const item: Variants = {
@@ -18,7 +18,7 @@ interface RevealProps {
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const reduce = useReducedMotion()
   return (
-    <motion.div
+    <m.div
       className={className}
       variants={reduce ? itemReduced : item}
       initial="hidden"
@@ -27,13 +27,13 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
       transition={{ delay }}
     >
       {children}
-    </motion.div>
+    </m.div>
   )
 }
 
 /** Container that staggers its <RevealItem> children. */
 export function RevealGroup({ children, className, as = 'div' }: { children: ReactNode; className?: string; as?: 'div' | 'ul' }) {
-  const Tag = as === 'ul' ? motion.ul : motion.div
+  const Tag = as === 'ul' ? m.ul : m.div
   return (
     <Tag
       className={className}
@@ -49,7 +49,7 @@ export function RevealGroup({ children, className, as = 'div' }: { children: Rea
 
 export function RevealItem({ children, className, as = 'div' }: { children: ReactNode; className?: string; as?: 'div' | 'li' }) {
   const reduce = useReducedMotion()
-  const Tag = as === 'li' ? motion.li : motion.div
+  const Tag = as === 'li' ? m.li : m.div
   return (
     <Tag className={className} variants={reduce ? itemReduced : item}>
       {children}

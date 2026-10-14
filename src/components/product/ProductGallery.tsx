@@ -1,9 +1,9 @@
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { AnimatePresence, m, useReducedMotion } from 'framer-motion'
 import { useState } from 'react'
 import { cn } from '../../lib/cn'
 import { SmartImage } from '../ui'
 
-export function ProductGallery({ images, name, className }: { images: string[]; name: string; className?: string }) {
+export function ProductGallery({ images, name, className, priority = false }: { images: string[]; name: string; className?: string; priority?: boolean }) {
   const [index, setIndex] = useState(0)
   const reduce = useReducedMotion()
   const current = images[index] ?? images[0]
@@ -12,7 +12,7 @@ export function ProductGallery({ images, name, className }: { images: string[]; 
       <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-sand">
         {/* Photos crossfade (with a slight settle) when a thumbnail is chosen. */}
         <AnimatePresence initial={false}>
-          <motion.div
+          <m.div
             key={current}
             className="absolute inset-0"
             initial={{ opacity: 0, scale: reduce ? 1 : 1.03 }}
@@ -20,8 +20,8 @@ export function ProductGallery({ images, name, className }: { images: string[]; 
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            <SmartImage src={current} alt={`${name}, photo ${index + 1} of ${images.length}`} width={640} height={480} wrapperClassName="h-full w-full" className="h-full w-full object-cover" />
-          </motion.div>
+            <SmartImage src={current} alt={`${name}, photo ${index + 1} of ${images.length}`} width={640} height={480} fetchPriority={priority && index === 0 ? 'high' : 'auto'} wrapperClassName="h-full w-full" className="h-full w-full object-cover" />
+          </m.div>
         </AnimatePresence>
       </div>
       {images.length > 1 && (

@@ -14,6 +14,6 @@ export const useFavoritesStore = create<FavoritesState>()(
       toggle: (id) => set((s) => ({ ids: s.ids.includes(id) ? s.ids.filter((x) => x !== id) : [id, ...s.ids] })),
       remove: (id) => set((s) => ({ ids: s.ids.filter((x) => x !== id) })),
     }),
-    { name: 'foodbekary-favorites', version: 1 },
+    { name: 'foodbekary-favorites', version: 1, skipHydration: true },
   ),
 )

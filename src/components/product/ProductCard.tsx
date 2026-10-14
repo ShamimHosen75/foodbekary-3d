@@ -8,7 +8,8 @@ import { Badge, Button, Card, SmartImage } from '../ui'
 import { FavoriteButton } from './FavoriteButton'
 import { PriceTag } from './PriceTag'
 
-export function ProductCard({ product }: { product: Product }) {
+/** `priority` = above the fold: load eagerly (first card also gets high fetch priority) for a fast LCP. */
+export function ProductCard({ product, priority = 0 }: { product: Product; priority?: 0 | 1 | 2 }) {
   const addToCart = useAddToCart()
   const openQuickView = useUiStore((s) => s.openQuickView)
   const soldOut = isSoldOut(product)
@@ -27,7 +28,8 @@ export function ProductCard({ product }: { product: Product }) {
             alt={product.name}
             width={640}
             height={480}
-            loading="lazy"
+            loading={priority ? 'eager' : 'lazy'}
+            fetchPriority={priority === 2 ? 'high' : 'auto'}
             decoding="async"
             wrapperClassName="h-full w-full"
             className={cn(
@@ -57,7 +59,7 @@ export function ProductCard({ product }: { product: Product }) {
         {isLowStock(product) && <p className="text-xs font-semibold text-accent-ink">Only {product.stock} left today</p>}
         <div className="mt-auto flex items-center justify-between gap-3 border-t border-line pt-4">
           <PriceTag product={product} className="text-sm" />
-          <Button size="sm" variant="accent" disabled={soldOut} onClick={() => addToCart(product)} aria-label={soldOut ? `${product.name} is sold out` : `Add ${product.name} to cart`}>
+          <Button size="sm" variant="accent" disabled={soldOut} onClick={() => addToCart(product)} aria-label={soldOut ? `Sold out: ${product.name}` : `Add to Cart: ${product.name}`}>
             {soldOut ? 'Sold out' : 'Add to Cart'}
           </Button>
         </div>

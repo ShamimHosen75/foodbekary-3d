@@ -134,7 +134,7 @@ await test('cart badge shows total quantity and survives reload', async () => {
   await p.evaluate(() => localStorage.setItem('foodbekary-cart', JSON.stringify({ state: { lines: [{ productId: 'classic-chocolate-chunk', qty: 1 }, { productId: 'raspberry-macaron', qty: 3 }] }, version: 1 })))
   await p.reload()
   assert((await p.getByTestId('cart-count').innerText()) === '4', 'badge not 4')
-  await p.getByRole('button', { name: 'Cart, 4 items' }).click()
+  await p.getByRole('button', { name: 'Cart 4 items' }).click()
   await p.getByRole('dialog', { name: 'Your Order' }).waitFor()
   await p.close()
 })

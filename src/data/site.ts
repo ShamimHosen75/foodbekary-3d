@@ -4,6 +4,8 @@
  */
 export const site = {
   name: 'Foodbekary',
+  /** Public URL (no trailing slash) for canonical links, sitemap and share images. PLACEHOLDER. */
+  url: 'https://foodbekary.netlify.app',
   /** Wordmark split so the suffix can take the accent colour. */
   wordmark: { lead: 'Food', accent: 'bekary' },
   tagline: 'Baked fresh daily',
