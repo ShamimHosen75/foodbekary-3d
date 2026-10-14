@@ -1,0 +1,94 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Colour roles were sampled from the reference recording
+ * (see REFERENCE_ANALYSIS.md §8) and adjusted where needed for WCAG AA.
+ * Change brand colours here only — every component reads these tokens.
+ */
+@theme {
+  /* Surfaces */
+  --color-cream: #f2eee4;          /* page background */
+  --color-cream-soft: #f7f2ed;     /* alternate section band */
+  --color-sand: #f3eee4;           /* modal + drawer header */
+  --color-surface: #ffffff;        /* cards, chips, inputs */
+  --color-line: #e8e1d6;           /* hairline borders */
+
+  /* Ink */
+  --color-ink: #2c231a;            /* headings, dark buttons — 13.3:1 on cream */
+  --color-ink-soft: #3d3128;       /* dark button hover */
+  --color-muted: #6b5e54;          /* body copy — 5.4:1 on cream */
+
+  /* Accent — terracotta */
+  --color-accent: #e08d6e;         /* decorative fills, dots, borders */
+  --color-accent-strong: #b4532f;  /* button fill w/ white text — 4.98:1 */
+  --color-accent-ink: #a84e2c;     /* accent text on cream — 4.78:1 */
+  --color-accent-tint: #fbe6dd;    /* soft badges */
+
+  /* Supporting */
+  --color-gold: #bb9f61;           /* stars, subscribe, ink text on top */
+  --color-forest: #2e3932;         /* footer */
+  --color-forest-ink: #d9cfc2;     /* footer body text — 7.8:1 */
+  --color-success: #3c723d;
+  --color-danger: #c2363b;
+
+  /* Type */
+  --font-display: 'Fraunces Variable', 'Georgia', serif;
+  --font-sans: 'Inter Variable', 'Noto Sans Bengali Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  --text-eyebrow: 0.6875rem;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* Shape + depth */
+  --radius-card: 1rem;
+  --radius-modal: 1.5rem;
+  --shadow-card: 0 1px 2px rgb(44 35 26 / 0.05);
+  --shadow-lift: 0 14px 32px -14px rgb(44 35 26 / 0.28);
+  --shadow-float: 0 24px 60px -20px rgb(44 35 26 / 0.35);
+
+  /* Motion */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-strong);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent-tint);
+    color: var(--color-ink);
+  }
+
+  img {
+    @apply max-w-full;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
