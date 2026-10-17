@@ -1,9 +1,8 @@
-import kitchen900 from '../assets/hero/scene-kitchen-900.webp'
-import kitchen1600 from '../assets/hero/scene-kitchen-1600.webp'
-import shopfront900 from '../assets/hero/scene-shopfront-900.webp'
-import shopfront1600 from '../assets/hero/scene-shopfront-1600.webp'
-import window900 from '../assets/hero/scene-window-900.webp'
-import window1600 from '../assets/hero/scene-window-1600.webp'
+import shopfrontNew from '../assets/hero/scene-shopfront-new.jpg'
+import counterImg from '../assets/hero/scene-counter.jpg'
+import bakehouseIdle from '../assets/hero/scene-bakehouse-idle.jpg'
+import bakehouseOpen from '../assets/hero/scene-bakehouse-open.jpg'
+import terraceImg from '../assets/hero/scene-terrace.jpg'
 import { site } from './site'
 
 export interface HeroScene {
@@ -17,41 +16,58 @@ export interface HeroScene {
   image: { src: string; srcSet: string }
 }
 
-const img = (small: string, large: string) => ({ src: large, srcSet: `${small} 900w, ${large} 1600w` })
+const img = (src: string) => ({ src, srcSet: src + ' 1600w' })
+
 
 export const heroScenes: HeroScene[] = [
   {
     id: 'shopfront',
-    label: 'The Shopfront',
-    eyebrow: 'Fresh every morning',
-    title: 'Small menu. Big care.',
-    body: 'We bake four things and give each one our full attention — layered cakes, chunky cookies, hand-piped macarons and cream pastries.',
-    chips: ['Real cream', 'Belgian chocolate', 'Almond shells'],
-    image: img(shopfront900, shopfront1600),
+    label: 'The Counter',
+    eyebrow: 'Fresh out of the oven',
+    title: 'Three things done right.',
+    body: 'We keep the menu small so we can make everything properly. Whole cakes, cracked-top cookies, and delicate French macarons.',
+    chips: ['Sponge & Cream', 'Nutella & Choco', 'Almond Shells'],
+    image: img(shopfrontNew),
   },
   {
-    id: 'kitchen',
-    label: 'The Kitchen',
-    eyebrow: 'Behind the counter',
-    title: 'Butter, flour, patience.',
-    body: 'Doughs rest for two days, butter is cultured, nothing comes from a packet. You can taste the waiting.',
-    chips: ['48-hour rest', 'Cultured butter', 'No premixes'],
-    image: img(kitchen900, kitchen1600),
+    id: 'counter',
+    label: 'The Counter',
+    eyebrow: 'Fresh out of the oven',
+    title: 'Three things done right.',
+    body: 'We keep the menu small so we can make everything properly. Whole cakes, cracked-top cookies, and delicate French macarons.',
+    chips: ['Sponge & Cream', 'Nutella & Choco', 'Almond Shells'],
+    image: img(counterImg),
   },
   {
-    id: 'window',
-    label: 'The Window Seat',
+    id: 'bakehouse-idle',
+    label: 'The Bakehouse',
+    eyebrow: 'Behind the glass',
+    title: 'Real butter, zero shortcuts.',
+    body: 'Laminated by hand every night. 72-hour cold fermented doughs, French butter, and organic raw cane sugar.',
+    chips: ['72hr Ferment', 'French Butter', 'Artisan Technique'],
+    image: img(bakehouseIdle),
+  },
+  {
+    id: 'bakehouse-open',
+    label: 'The Bakehouse',
+    eyebrow: 'Behind the glass',
+    title: 'Real butter, zero shortcuts.',
+    body: 'Laminated by hand every night. 72-hour cold fermented doughs, French butter, and organic raw cane sugar.',
+    chips: ['72hr Ferment', 'French Butter', 'Artisan Technique'],
+    image: img(bakehouseOpen),
+  },
+  {
+    id: 'terrace',
+    label: 'The Terrace',
     eyebrow: site.contact.address,
-    title: 'Coffee’s on at eight.',
-    body: 'Grab the corner table, order a pour-over and something still warm from the tray.',
-    chips: ['Window seats', 'Pour-over', site.hours.label.replace(':00', '').replace(':00', '')],
-    image: img(window900, window1600),
+    title: 'Morning sun, warm crusts.',
+    body: 'A quiet morning spot above the avenue. Fresh batch sourdoughs, croissants, and single-origin coffee poured from 8 AM.',
+    chips: ['Outdoor Seating', 'Pour-over', 'Daily 8am-10pm'],
+    image: img(terraceImg),
   },
 ]
 
 /**
- * Optional scroll-scrubbed footage. Drop an MP4 (encoded with short GOPs, e.g.
- * `ffmpeg -i in.mp4 -c:v libx264 -g 6 -crf 24 -an out.mp4`) into /public and set
- * the path here — the hero switches from photo crossfades to video scrubbing.
+ * Optional scroll-scrubbed footage.
  */
 export const heroVideo: { src: string; poster?: string } | null = null

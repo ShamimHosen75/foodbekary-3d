@@ -16,8 +16,10 @@ function SceneLayer({ scene, index, count, progress, reduceMotion }: LayerProps)
   const start = sceneStart(index, count)
   const end = sceneStart(index + 1, count)
   const opacity = useTransform(progress, index === 0 ? [0, 1] : [start - FADE, start + FADE], index === 0 ? [1, 1] : [0, 1])
-  const scale = useTransform(progress, [Math.max(0, start - FADE), end + FADE], reduceMotion ? [1, 1] : [1.04, 1.2])
-  const y = useTransform(progress, [Math.max(0, start - FADE), end + FADE], reduceMotion ? ['0%', '0%'] : ['0%', '-3%'])
+  // Stronger zoom range for dramatic 3D "camera push" feel
+  const scale = useTransform(progress, [Math.max(0, start - FADE), end + FADE], reduceMotion ? [1, 1] : [1.0, 1.38])
+  // Subtle vertical parallax — image drifts slightly upward as camera "moves in"
+  const y = useTransform(progress, [Math.max(0, start - FADE), end + FADE], reduceMotion ? ['0%', '0%'] : ['0%', '-4%'])
 
   return (
     <m.img
@@ -34,6 +36,7 @@ function SceneLayer({ scene, index, count, progress, reduceMotion }: LayerProps)
     />
   )
 }
+
 
 /** Scroll-scrubbed footage — used instead of photos when `heroVideo` is configured. */
 function ScrubVideo({ src, poster, progress }: { src: string; poster?: string; progress: MotionValue<number> }) {

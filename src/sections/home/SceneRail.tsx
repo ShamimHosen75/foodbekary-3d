@@ -6,20 +6,29 @@ export interface SceneRailProps {
   onSelect: (index: number) => void
 }
 
-/** Vertical scene indicator on the right edge; each dot jumps to its scene. */
+/** Vertical scene indicator on the right edge; each dot jumps to its scene group. */
 export function SceneRail({ labels, active, onSelect }: SceneRailProps) {
+  // Deduplicate: build a list of { label, firstIndex } for unique groups
+  const groups: { label: string; firstIndex: number }[] = []
+  labels.forEach((label, i) => {
+    if (!groups.find((g) => g.label === label)) {
+      groups.push({ label, firstIndex: i })
+    }
+  })
+  const activeLabel = labels[active]
+
   return (
     <nav aria-label="Story scenes" className="absolute top-1/2 right-4 hidden -translate-y-1/2 md:block lg:right-8">
       <ol className="flex flex-col items-end gap-4">
-        {labels.map((label, i) => {
-          const current = i === active
+        {groups.map(({ label, firstIndex }) => {
+          const current = label === activeLabel
           return (
             <li key={label}>
               <button
                 type="button"
-                onClick={() => onSelect(i)}
+                onClick={() => onSelect(firstIndex)}
                 aria-current={current ? 'step' : undefined}
-                aria-label={`Scene ${i + 1}: ${label}`}
+                aria-label={`Scene: ${label}`}
                 className="group flex cursor-pointer items-center gap-3"
               >
                 <span
@@ -44,3 +53,4 @@ export function SceneRail({ labels, active, onSelect }: SceneRailProps) {
     </nav>
   )
 }
+

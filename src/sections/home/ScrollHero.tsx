@@ -37,7 +37,7 @@ export function ScrollHero() {
   )
 
   return (
-    <section ref={sectionRef} aria-label="Our story" className="relative h-[420svh] md:h-[440vh]">
+    <section ref={sectionRef} aria-label="Our story" className="relative h-[600svh] md:h-[620vh]">
       <h1 className="sr-only">
         {site.name} — {site.tagline}
       </h1>

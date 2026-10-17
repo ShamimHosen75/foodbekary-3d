@@ -21,11 +21,20 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
   const hidden = reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18, filter: 'blur(6px)' }
   const shown = reduceMotion ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }
 
+  // Compute logical group index (unique labels in order of first appearance)
+  const uniqueLabels: string[] = []
+  scenes.forEach((s) => { if (!uniqueLabels.includes(s.label)) uniqueLabels.push(s.label) })
+  const groupIndex = uniqueLabels.indexOf(scene.label)
+  const groupCount = uniqueLabels.length
+
+  // Use label+eyebrow as key so copy only animates when the logical scene changes
+  const copyKey = `${scene.label}-${scene.eyebrow}`
+
   return (
     <div className="relative min-h-[19rem] w-full max-w-[25rem] sm:min-h-[21rem]" aria-live="polite">
       <AnimatePresence mode="wait" initial={false}>
         <m.div
-          key={scene.id}
+          key={copyKey}
           initial={hidden}
           animate={shown}
           exit={{ ...hidden, y: reduceMotion ? 0 : -12, transition: { duration: 0.22 } }}
@@ -33,7 +42,7 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
           className="absolute inset-x-0 bottom-0 flex flex-col gap-3.5"
         >
           <p className="font-mono text-[0.6875rem] tracking-[0.2em] text-muted">
-            {pad(active + 1)} / {pad(scenes.length)}
+            {pad(groupIndex + 1)} / {pad(groupCount)}
           </p>
           <p className="text-eyebrow font-semibold text-accent-ink uppercase">{scene.eyebrow}</p>
           <h2 className="font-sans text-[2.25rem] leading-[1.05] font-extrabold tracking-[-0.025em] text-ink sm:text-[2.75rem]">
@@ -50,7 +59,7 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
           {isLast && (
             <div className="mt-2 flex flex-wrap gap-3">
               <Link to={categoryPath('cakes')} className={buttonClasses('primary', 'lg')}>
-                Explore the menu
+                Explore Category Menu
               </Link>
               <a
                 href={`https://wa.me/${site.contact.whatsapp}?text=${encodeURIComponent(`Hi ${site.name}! I'd like to order ahead.`)}`}
@@ -58,7 +67,7 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
                 rel="noreferrer"
                 className={buttonClasses('outline', 'lg')}
               >
-                Order ahead
+                Order Ahead
               </a>
             </div>
           )}
@@ -67,3 +76,4 @@ export function HeroCopy({ scenes, active, reduceMotion }: HeroCopyProps) {
     </div>
   )
 }
+
