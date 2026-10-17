@@ -16,8 +16,8 @@ export function Chip({ active = false, className, type = 'button', ...props }: C
         'inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border px-3.5 text-xs font-medium whitespace-nowrap',
         'transition-[background-color,color,border-color] duration-200 ease-out-soft',
         active
-          ? 'border-ink bg-ink text-white'
-          : 'border-line bg-surface text-ink hover:border-ink/40',
+          ? 'border-accent-strong bg-accent-strong text-white'
+          : 'border-line bg-surface text-ink hover:border-accent',
         className,
       )}
       {...props}

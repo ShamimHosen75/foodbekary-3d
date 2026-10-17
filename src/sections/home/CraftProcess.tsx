@@ -14,7 +14,7 @@ const steps = [
     title: 'Mix by hand',
     body: 'Every dough starts with a wooden spoon and honest effort. No shortcuts, no machines for the critical bits.',
     img: mixImg,
-    color: 'bg-accent-tint',
+    color: 'bg-surface hover:border-accent',
     accent: 'text-accent-ink',
   },
   {
@@ -23,8 +23,8 @@ const steps = [
     title: 'Slow bake',
     body: 'Stone deck ovens at low heat. The crust develops in its own time — never rushed, always right.',
     img: bakeImg,
-    color: 'bg-[#fdf3e7]',
-    accent: 'text-[#a0672a]',
+    color: 'bg-surface hover:border-gold',
+    accent: 'text-gold',
   },
   {
     id: 'decorate',
@@ -32,8 +32,8 @@ const steps = [
     title: 'Hand-piped',
     body: 'Every swirl of cream, every drizzle of ganache is applied by a pastry chef — not extruded by a nozzle.',
     img: decorateImg,
-    color: 'bg-[#f0f5f0]',
-    accent: 'text-[#3c723d]',
+    color: 'bg-surface hover:border-emerald-500/50',
+    accent: 'text-emerald-400',
   },
   {
     id: 'pack',
@@ -41,8 +41,8 @@ const steps = [
     title: 'Packed with care',
     body: 'Kraft boxes, terracotta ribbon, and a handwritten note. Because the unboxing is part of the gift.',
     img: packImg,
-    color: 'bg-[#f5f0f5]',
-    accent: 'text-[#7a3b7a]',
+    color: 'bg-surface hover:border-accent',
+    accent: 'text-accent',
   },
 ]
 

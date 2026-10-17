@@ -70,7 +70,7 @@ export interface HeroBackdropProps {
 export function HeroBackdrop({ scenes, progress, reduceMotion, video }: HeroBackdropProps) {
   const outro = useTransform(progress, [SCENE_SPAN - 0.02, 0.99], [0, 1])
   return (
-    <div className="absolute inset-0 overflow-hidden bg-ink">
+    <div className="absolute inset-0 overflow-hidden bg-black">
       {video ? (
         <ScrubVideo src={video.src} poster={video.poster} progress={progress} />
       ) : (

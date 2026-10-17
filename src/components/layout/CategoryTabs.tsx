@@ -14,7 +14,7 @@ export function CategoryTabs({ className }: { className?: string }) {
               className={({ isActive }) =>
                 cn(
                   'block rounded-full px-3.5 py-1.5 text-[0.8125rem] font-medium whitespace-nowrap transition-colors duration-200',
-                  isActive ? 'bg-ink text-white' : 'text-muted hover:text-ink',
+                  isActive ? 'bg-accent-strong text-white font-semibold' : 'text-muted hover:text-ink',
                 )
               }
             >

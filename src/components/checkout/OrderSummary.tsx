@@ -16,7 +16,7 @@ export function OrderSummary({ items, zone, children }: { items: CartItem[]; zon
           <li key={i.product.id} className="flex items-center gap-3 text-sm">
             <span className="relative shrink-0">
               <img src={i.product.images[0]} alt="" width={48} height={36} className="h-10 w-12 rounded-lg object-cover" />
-              <span className="absolute -top-1.5 -right-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-ink px-1 text-[0.625rem] font-bold text-white">{i.qty}</span>
+              <span className="absolute -top-1.5 -right-1.5 grid h-5 min-w-5 place-items-center rounded-full bg-accent-strong px-1 text-[0.625rem] font-bold text-white">{i.qty}</span>
             </span>
             <span className="min-w-0 flex-1 truncate">{i.product.name}</span>
             <span className="font-semibold tabular-nums">{formatPrice(i.lineTotal)}</span>

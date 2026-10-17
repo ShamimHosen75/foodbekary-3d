@@ -98,7 +98,7 @@ const FLAVOR_PROFILES: FlavorProfile[] = [
     emoji: '🍫',
     origin: 'Madagascar & Ghana estate cacao',
     accentColor: '#8a4221',
-    bgTint: 'bg-[#faf0eb]',
+    bgTint: 'bg-accent/15 border border-accent/25',
     categorySlug: 'cakes',
     categoryName: 'Celebration Cakes',
     sensory: {
@@ -118,7 +118,7 @@ const FLAVOR_PROFILES: FlavorProfile[] = [
     emoji: '🍓',
     origin: 'Sreemangal organic micro-orchards',
     accentColor: '#c43a49',
-    bgTint: 'bg-[#fdf0f2]',
+    bgTint: 'bg-rose-500/15 border border-rose-500/25',
     categorySlug: 'pastries',
     categoryName: 'Cream Pastries',
     sensory: {
@@ -138,7 +138,7 @@ const FLAVOR_PROFILES: FlavorProfile[] = [
     emoji: '🌿',
     origin: 'Bronte, Sicily (Protected Origin)',
     accentColor: '#5c7847',
-    bgTint: 'bg-[#f2f6ee]',
+    bgTint: 'bg-emerald-500/15 border border-emerald-500/25',
     categorySlug: 'macarons',
     categoryName: 'French Macarons',
     sensory: {
@@ -158,7 +158,7 @@ const FLAVOR_PROFILES: FlavorProfile[] = [
     emoji: '🍯',
     origin: 'Essex Sea Coast & Normandy Cultured Butter',
     accentColor: '#b4742a',
-    bgTint: 'bg-[#fbf4ea]',
+    bgTint: 'bg-amber-500/15 border border-amber-500/25',
     categorySlug: 'cookies',
     categoryName: 'Fresh-Baked Cookies',
     sensory: {
@@ -262,7 +262,7 @@ export function BakehouseLive() {
                 {activeMode === 'oven' && (
                   <m.span
                     layoutId="liveModeIndicator"
-                    className="absolute inset-0 rounded-full bg-ink"
+                    className="absolute inset-0 rounded-full bg-accent-strong shadow-sm"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -279,7 +279,7 @@ export function BakehouseLive() {
                 {activeMode === 'tasting' && (
                   <m.span
                     layoutId="liveModeIndicator"
-                    className="absolute inset-0 rounded-full bg-ink"
+                    className="absolute inset-0 rounded-full bg-accent-strong shadow-sm"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -386,15 +386,15 @@ export function BakehouseLive() {
 
                 {/* Right column: Interactive Oven Monitor Display */}
                 <div className="lg:col-span-7">
-                  <div className="relative overflow-hidden rounded-2xl border border-line bg-ink text-cream p-6 sm:p-8 shadow-float">
+                  <div className="relative overflow-hidden rounded-2xl border border-[#322c24] bg-[#14120f] text-[#f7efe4] p-6 sm:p-8 shadow-float">
                     {/* Simulated stone hearth warm glow */}
                     <div className="pointer-events-none absolute -right-20 -bottom-20 size-72 rounded-full bg-accent/20 blur-[90px]" />
                     <div className="pointer-events-none absolute -left-20 -top-20 size-64 rounded-full bg-[#bb9f61]/15 blur-[80px]" />
 
                     {/* Oven header */}
-                    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-cream/15 pb-5">
+                    <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/15 pb-5">
                       <div className="flex items-center gap-3">
-                        <div className="flex size-10 items-center justify-center rounded-xl bg-surface/10 backdrop-blur-sm text-xl">
+                        <div className="flex size-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-sm text-xl">
                           🔥
                         </div>
                         <div>
@@ -408,12 +408,12 @@ export function BakehouseLive() {
                       </div>
 
                       <div className="flex items-center gap-3">
-                        <div className="rounded-lg bg-surface/10 px-3 py-1.5 text-right font-mono text-xs">
-                          <span className="block text-cream/60">Oven Hearth</span>
+                        <div className="rounded-lg bg-white/10 px-3 py-1.5 text-right font-mono text-xs">
+                          <span className="block text-white/60">Oven Hearth</span>
                           <span className="font-bold text-accent">{activeBatch.temperature}</span>
                         </div>
-                        <div className="rounded-lg bg-surface/10 px-3 py-1.5 text-right font-mono text-xs">
-                          <span className="block text-cream/60">Scheduled</span>
+                        <div className="rounded-lg bg-white/10 px-3 py-1.5 text-right font-mono text-xs">
+                          <span className="block text-white/60">Scheduled</span>
                           <span className="font-bold text-white">{activeBatch.time}</span>
                         </div>
                       </div>
@@ -430,22 +430,22 @@ export function BakehouseLive() {
                             {activeBatch.title}
                           </h4>
                         </div>
-                        <span className="font-display text-4xl select-none opacity-20 font-black">
+                        <span className="font-display text-4xl select-none opacity-20 font-black text-white">
                           {activeBatch.batchNumber}
                         </span>
                       </div>
 
-                      <p className="text-sm leading-relaxed text-cream/80">
+                      <p className="text-sm leading-relaxed text-white/85">
                         {activeBatch.bakerNote}
                       </p>
 
                       {/* Animated Baking Chamber Gauge */}
-                      <div className="rounded-xl border border-cream/10 bg-surface/5 p-4 backdrop-blur-sm">
-                        <div className="flex items-center justify-between text-xs font-mono text-cream/70 mb-2">
+                      <div className="rounded-xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
+                        <div className="flex items-center justify-between text-xs font-mono text-white/70 mb-2">
                           <span>Baking Chamber Progress</span>
                           <span className="font-bold text-accent">{activeBatch.progress}% Done</span>
                         </div>
-                        <div className="relative h-3 w-full overflow-hidden rounded-full bg-surface/10">
+                        <div className="relative h-3 w-full overflow-hidden rounded-full bg-white/10">
                           <m.div
                             className="h-full rounded-full bg-gradient-to-r from-accent via-[#e08d6e] to-[#bb9f61]"
                             animate={{
@@ -454,7 +454,7 @@ export function BakehouseLive() {
                             transition={{ duration: 0.6 }}
                           />
                         </div>
-                        <div className="mt-3 flex items-center justify-between text-[0.6875rem] font-mono text-cream/50">
+                        <div className="mt-3 flex items-center justify-between text-[0.6875rem] font-mono text-white/60">
                           <span>Proofed & Scored</span>
                           <span>Oven Rise</span>
                           <span>Golden Crust</span>
@@ -463,13 +463,13 @@ export function BakehouseLive() {
                       </div>
 
                       {/* Interactive Bell action */}
-                      <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t border-cream/15 pt-5">
+                      <div className="mt-4 flex flex-wrap items-center justify-between gap-4 border-t border-white/15 pt-5">
                         <div className="flex items-center gap-2">
                           <span className="relative flex h-2.5 w-2.5">
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
                             <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
                           </span>
-                          <span className="text-xs text-cream/70">
+                          <span className="text-xs text-white/80">
                             Want to grab this batch while steaming?
                           </span>
                         </div>
@@ -664,7 +664,7 @@ export function BakehouseLive() {
                       </span>
                       <Link
                         to={`/menu/${selectedFlavor.categorySlug}`}
-                        className="inline-flex items-center gap-1.5 rounded-full bg-ink px-5 py-2 text-xs font-bold text-white shadow-card transition-all duration-300 hover:bg-accent-strong hover:scale-105"
+                        className="inline-flex items-center gap-1.5 rounded-full bg-accent-strong px-5 py-2 text-xs font-bold text-white shadow-card transition-all duration-300 hover:bg-accent hover:text-ink hover:scale-105"
                       >
                         <span>Taste in Menu</span>
                         <span aria-hidden="true">→</span>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -8,7 +8,20 @@
     <link rel="preload" href="/src/assets/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/src/assets/fonts/fraunces-latin-var.woff2" as="font" type="font/woff2" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#F2EEE4" />
+    <meta name="theme-color" content="#0e0d0b" />
+    <script>
+      (function() {
+        try {
+          var t = localStorage.getItem('foodbekary_theme') || 'dark';
+          document.documentElement.setAttribute('data-theme', t);
+          if (t === 'light') {
+            document.documentElement.classList.add('theme-light');
+          } else {
+            document.documentElement.classList.remove('theme-light');
+          }
+        } catch(e) {}
+      })();
+    </script>
     <meta name="description" content="Handcrafted cakes, cookies, macarons and pastries baked fresh every morning." />
     <meta property="og:site_name" content="Foodbekary" />
     <meta property="og:locale" content="en_BD" />

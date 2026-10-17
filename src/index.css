@@ -35,36 +35,36 @@
 }
 
 /*
- * Design tokens. Colour roles were sampled from the reference recording
- * (see REFERENCE_ANALYSIS.md §8) and adjusted where needed for WCAG AA.
- * Change brand colours here only — every component reads these tokens.
+ * Design tokens.
+ * DEFAULT: Luxury Artisan Dark Bakery Theme (Obsidian, roasted espresso, warm amber-copper).
+ * SECONDARY: Light Cream Theme (activated via data-theme="light" or .theme-light).
  */
 @theme {
-  /* Surfaces */
-  --color-cream: #f2eee4;          /* page background */
-  --color-cream-soft: #f7f2ed;     /* alternate section band */
-  --color-sand: #f3eee4;           /* modal + drawer header */
-  --color-surface: #ffffff;        /* cards, chips, inputs */
-  --color-line: #e8e1d6;           /* hairline borders */
+  /* Surfaces — DEFAULT DARK */
+  --color-cream: #0e0d0b;          /* rich warm obsidian page background */
+  --color-cream-soft: #14120f;     /* roasted cocoa alternate section band */
+  --color-sand: #1b1814;           /* modal + drawer header, chips */
+  --color-surface: #1e1b17;        /* cards, inputs, surfaces */
+  --color-line: #322c24;           /* warm hairline bronze border */
 
-  /* Ink */
-  --color-ink: #2c231a;            /* headings, dark buttons — 13.3:1 on cream */
-  --color-ink-soft: #3d3128;       /* dark button hover */
-  --color-muted: #6b5e54;          /* body copy — 5.4:1 on cream */
+  /* Ink / Text — DEFAULT DARK */
+  --color-ink: #f7efe4;            /* champagne cream headings & high-contrast titles */
+  --color-ink-soft: #e8ded2;       /* secondary text */
+  --color-muted: #bdaea0;          /* bright warm oyster body copy — crisp & clear */
 
-  /* Accent — terracotta */
-  --color-accent: #e08d6e;         /* decorative fills, dots, borders */
-  --color-accent-strong: #b4532f;  /* button fill w/ white text — 4.98:1 */
-  --color-accent-ink: #a84e2c;     /* accent text on cream — 4.78:1 */
-  --color-accent-tint: #fbe6dd;    /* soft badges */
+  /* Accent — glowing golden copper ember */
+  --color-accent: #ff8c53;         /* glowing decorative fills, dots, borders */
+  --color-accent-strong: #e56828;  /* vibrant button fill w/ white text */
+  --color-accent-ink: #ff9d66;     /* accent text on dark */
+  --color-accent-tint: rgba(255, 140, 83, 0.16); /* soft badges */
 
   /* Supporting */
-  --color-gold: #bb9f61;           /* stars, subscribe, ink text on top */
-  --color-gold-light: #d6bf88;     /* gold text on the footer — 5.2:1 */
-  --color-forest: #2e3932;         /* footer */
-  --color-forest-ink: #d9cfc2;     /* footer body text — 7.8:1 */
-  --color-success: #3c723d;
-  --color-danger: #c2363b;
+  --color-gold: #e8be6b;           /* glowing warm pastry gold */
+  --color-gold-light: #f0cf85;     /* light gold */
+  --color-forest: #090807;         /* darkest rich espresso footer */
+  --color-forest-ink: #d9cfc2;     /* footer body text */
+  --color-success: #4ade80;
+  --color-danger: #f87171;
 
   /* Type */
   --font-display: 'Fraunces Variable', 'Taka Sign', 'Georgia', serif;
@@ -77,12 +77,42 @@
   /* Shape + depth */
   --radius-card: 1rem;
   --radius-modal: 1.5rem;
-  --shadow-card: 0 1px 2px rgb(44 35 26 / 0.05);
-  --shadow-lift: 0 14px 32px -14px rgb(44 35 26 / 0.28);
-  --shadow-float: 0 24px 60px -20px rgb(44 35 26 / 0.35);
+  --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 20px 45px -12px rgba(0, 0, 0, 0.75), 0 0 24px rgba(255, 140, 83, 0.15);
+  --shadow-float: 0 30px 70px -15px rgba(0, 0, 0, 0.85);
 
   /* Motion */
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Secondary Light Theme */
+[data-theme="light"],
+.theme-light {
+  --color-cream: #f4efe6;
+  --color-cream-soft: #faf6f0;
+  --color-sand: #eae2d5;
+  --color-surface: #ffffff;
+  --color-line: #e4dcce;
+
+  --color-ink: #261e16;
+  --color-ink-soft: #382e24;
+  --color-muted: #6b5d50;
+
+  --color-accent: #e06d38;
+  --color-accent-strong: #be4e1c;
+  --color-accent-ink: #a63e12;
+  --color-accent-tint: #fae7dd;
+
+  --color-gold: #bb9f61;
+  --color-gold-light: #d6bf88;
+  --color-forest: #222924;
+  --color-forest-ink: #d9cfc2;
+  --color-success: #3c723d;
+  --color-danger: #c2363b;
+
+  --shadow-card: 0 1px 3px rgb(44 35 26 / 0.08);
+  --shadow-lift: 0 14px 32px -14px rgb(44 35 26 / 0.28);
+  --shadow-float: 0 24px 60px -20px rgb(44 35 26 / 0.35);
 }
 
 @layer base {

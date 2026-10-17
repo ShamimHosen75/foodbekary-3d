@@ -40,7 +40,7 @@ export function Drawer({ open, onClose, title, children, footer, className, cont
         <div className="fixed inset-0 z-50">
           <m.div
             data-testid="drawer-backdrop"
-            className="absolute inset-0 bg-ink/35 backdrop-blur-[3px]"
+            className="absolute inset-0 bg-black/60 backdrop-blur-[3px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

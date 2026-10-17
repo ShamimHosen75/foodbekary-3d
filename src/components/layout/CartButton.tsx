@@ -13,7 +13,7 @@ export function CartButton() {
     <button
       type="button"
       onClick={() => open('cart')}
-      className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-full bg-ink pr-1.5 pl-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-strong"
+      className="inline-flex h-9 cursor-pointer items-center gap-2 rounded-full border border-line bg-surface pr-1.5 pl-3.5 text-sm font-semibold text-ink shadow-xs transition-colors duration-200 hover:border-accent hover:text-accent-ink"
     >
       <span aria-hidden="true">🛒</span>
       {/* Visible from sm up; always part of the accessible name ("Cart 2 items"). */}

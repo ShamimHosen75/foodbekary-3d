@@ -18,7 +18,7 @@ export function Toaster() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, x: 24 }}
             transition={{ duration: 0.25 }}
-            className="pointer-events-auto flex max-w-sm cursor-pointer items-center gap-2 rounded-xl bg-ink px-4 py-3 text-left text-sm font-medium text-white shadow-float"
+            className="pointer-events-auto flex max-w-sm cursor-pointer items-center gap-2 rounded-xl border border-line bg-surface px-4 py-3 text-left text-sm font-medium text-ink shadow-float"
           >
             <span aria-hidden="true">{t.icon}</span>
             {t.message}

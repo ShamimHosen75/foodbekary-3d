@@ -9,11 +9,11 @@ const base =
   'active:scale-[0.97] disabled:pointer-events-none disabled:opacity-50 cursor-pointer'
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-ink text-white hover:bg-accent-strong',
-  accent: 'bg-accent-strong text-white hover:bg-ink',
-  outline: 'border border-line bg-surface/70 text-ink hover:border-ink',
-  ghost: 'text-ink hover:bg-ink/5',
-  gold: 'bg-gold text-ink hover:bg-ink hover:text-white',
+  primary: 'bg-ink text-cream hover:bg-accent-strong hover:text-white',
+  accent: 'bg-accent-strong text-white hover:bg-accent hover:text-ink shadow-sm',
+  outline: 'border border-line bg-surface/80 text-ink hover:border-accent hover:text-accent-ink',
+  ghost: 'text-ink hover:bg-surface/70',
+  gold: 'bg-gold text-ink hover:bg-surface hover:text-accent',
 }
 
 const sizes: Record<ButtonSize, string> = {

@@ -62,7 +62,7 @@ export function CategoryShowcase() {
                     {isActive && (
                       <m.span
                         layoutId="activeFilterPill"
-                        className="absolute inset-0 rounded-full bg-ink"
+                        className="absolute inset-0 rounded-full bg-accent-strong"
                         transition={{ type: 'spring', stiffness: 380, damping: 28 }}
                       />
                     )}
